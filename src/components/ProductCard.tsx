@@ -99,9 +99,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
               {/* Price and Add to Cart */}
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
-                  <span className="text-lg font-bold text-gray-900">₹{priceInINR}</span>
+                  <span className="text-lg font-bold text-gray-900">₹{price}</span>
                   <div className="text-xs text-gray-500">
-                    <span className="line-through">₹{Math.round(priceInINR * 1.15)}</span>
+                    <span className="line-through">₹{Math.round(price * 1.15)}</span>
                     <span className="text-primary ml-1">Save 15%</span>
                   </div>
                 </div>
