@@ -14,14 +14,12 @@ import ContactPage from './pages/ContactPage';
 import Footer from './components/Footer';
 import { CartProvider } from './context/CartContext';
 import { UserProvider } from './context/UserContext';
-import { SupabaseProvider } from './context/SupabaseContext';
 import ChatBot from './components/ChatBot';
 import WhatsAppButton from './components/WhatsAppButton';
 import BackendStatus from './components/BackendStatus';
 
 function App() {
   return (
-    <SupabaseProvider>
       <UserProvider>
         <CartProvider>
           <Router>
@@ -55,7 +53,6 @@ function App() {
           </Router>
         </CartProvider>
       </UserProvider>
-    </SupabaseProvider>
   );
 }
 

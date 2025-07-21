@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosResponse } from 'axios';
-import { supabaseService } from './supabaseService';
 
 interface ApiResponse<T = any> {
   status: 'success' | 'error' | 'fail';
@@ -136,19 +135,8 @@ class ApiService {
     sort?: string;
   }): Promise<ApiResponse> {
     try {
-      // Try Supabase first, fallback to API
-      try {
-        const result = await supabaseService.getProducts(params);
-        return {
-          status: 'success',
-          data: { products: result.products },
-          totalResults: result.totalResults,
-        };
-      } catch (supabaseError) {
-        console.log('Supabase unavailable, trying API fallback...');
-        const response = await this.api.get('/products', { params });
-        return response.data;
-      }
+      const response = await this.api.get('/products', { params });
+      return response.data;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to fetch products');
     }
@@ -156,18 +144,8 @@ class ApiService {
 
   async getProduct(id: string): Promise<ApiResponse> {
     try {
-      // Try Supabase first, fallback to API
-      try {
-        const product = await supabaseService.getProduct(id);
-        return {
-          status: 'success',
-          data: { product },
-        };
-      } catch (supabaseError) {
-        console.log('Supabase unavailable, trying API fallback...');
-        const response = await this.api.get(`/products/${id}`);
-        return response.data;
-      }
+      const response = await this.api.get(`/products/${id}`);
+      return response.data;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to fetch product');
     }
@@ -175,18 +153,8 @@ class ApiService {
 
   async getFeaturedProducts(): Promise<ApiResponse> {
     try {
-      // Try Supabase first, fallback to API
-      try {
-        const products = await supabaseService.getFeaturedProducts();
-        return {
-          status: 'success',
-          data: { products },
-        };
-      } catch (supabaseError) {
-        console.log('Supabase unavailable, trying API fallback...');
-        const response = await this.api.get('/products/featured');
-        return response.data;
-      }
+      const response = await this.api.get('/products/featured');
+      return response.data;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to fetch featured products');
     }
@@ -194,18 +162,8 @@ class ApiService {
 
   async getProductsByCategory(category: string): Promise<ApiResponse> {
     try {
-      // Try Supabase first, fallback to API
-      try {
-        const products = await supabaseService.getProductsByCategory(category);
-        return {
-          status: 'success',
-          data: { products },
-        };
-      } catch (supabaseError) {
-        console.log('Supabase unavailable, trying API fallback...');
-        const response = await this.api.get(`/products/category/${category}`);
-        return response.data;
-      }
+      const response = await this.api.get(`/products/category/${category}`);
+      return response.data;
     } catch (error: any) {
       throw new Error(error.response?.data?.message || 'Failed to fetch products by category');
     }
